@@ -1,8 +1,6 @@
 FROM p5-base
 
-ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
-ENV PATH="${PATH}:/hadoop-3.4.3/bin:/spark-4.1.1-bin-hadoop3/bin"
-ENV HADOOP_HOME=/hadoop-3.4.3
 ENV SPARK_HOME=/spark-4.1.1-bin-hadoop3
+ENV PATH="${PATH}:${SPARK_HOME}/bin:${SPARK_HOME}/sbin"
 
-CMD ["/bin/sh", "-c", "$SPARK_HOME/sbin/start-slave.sh spark://boss:7077 && tail -f /dev/null"]
+CMD ["/bin/sh", "-c", "$SPARK_HOME/sbin/start-worker.sh spark://p5-spark-boss-1:7077 && tail -f /dev/null"]
